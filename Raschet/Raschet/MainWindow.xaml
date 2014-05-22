@@ -1,0 +1,25 @@
+﻿<Window x:Class="Raschet.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="444" Width="525">
+    <Grid Height="398">
+        <Label Content="Давление рабочей среды" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" Width="151" />
+        <Button Content="Расчет" Height="23" HorizontalAlignment="Left" Margin="407,363,0,0" Name="button1" VerticalAlignment="Top" Width="75" />
+        <Label Content="Марка резины" Height="28" HorizontalAlignment="Left" Margin="12,38,0,0" Name="label2" VerticalAlignment="Top" />
+        <Label Content="Коэффициент набухания резины по ТУ" Height="28" HorizontalAlignment="Left" Margin="12,64,0,0" Name="label3" VerticalAlignment="Top" />
+        <Label Content="Диапазон рабочих температур" Height="28" HorizontalAlignment="Left" Margin="12,89,0,0" Name="label4" VerticalAlignment="Top" />
+        <Label Content="Температура рабочей среды" Height="28" HorizontalAlignment="Left" Margin="12,114,0,0" Name="label5" VerticalAlignment="Top" />
+        <Label Content="Види уплотнения" Height="28" HorizontalAlignment="Left" Margin="12,138,0,0" Name="label6" VerticalAlignment="Top" />
+        <Label Content="Внутренний диаметр кольца D" Height="28" HorizontalAlignment="Left" Margin="12,199,0,0" Name="label7" VerticalAlignment="Top" />
+        <Label Content="Диаметр канавки" Height="28" HorizontalAlignment="Left" Margin="12,294,0,0" Name="label8" VerticalAlignment="Top" />
+        <Label Content="Диаметр поперечного сечения кольца d" Height="28" HorizontalAlignment="Left" Margin="12,224,0,0" Name="label9" VerticalAlignment="Top" />
+        <Label Content="Диаметр штока" Height="28" HorizontalAlignment="Left" Margin="12,270,0,0" Name="label10" VerticalAlignment="Top" />
+        <Label Content="Диаметр цилиндра" Height="28" HorizontalAlignment="Left" Margin="12,244,0,0" Name="label11" VerticalAlignment="Top" />
+        <Label Content="Размеры деталей в мм" Height="28" HorizontalAlignment="Left" Margin="47,165,0,0" Name="label12" VerticalAlignment="Top" />
+        <Label Content="Ширина канавки" Height="28" HorizontalAlignment="Left" Margin="12,320,0,0" Name="label13" VerticalAlignment="Top" />
+        <Label Content="Биспис относительно" Height="28" HorizontalAlignment="Left" Margin="12,346,0,0" Name="label14" VerticalAlignment="Top" />
+        <Button Content="Очистить" Height="23" HorizontalAlignment="Left" Margin="407,17,0,0" Name="button2" VerticalAlignment="Top" Width="75" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="248,14,0,0" Name="textBox1" VerticalAlignment="Top" Width="120" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="328,102,0,0" Name="textBox2" VerticalAlignment="Top" Width="120" />
+    </Grid>
+</Window>

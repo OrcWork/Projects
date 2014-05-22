@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpLesson1", "CSharpLesson1\CSharpLesson1.csproj", "{35A57224-D979-474D-A22E-245EAD42A608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflection", "Reflection\Reflection.csproj", "{DA5225BB-DDCF-4A73-A660-30BB2D380DC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflect1", "Reflect1\Reflect1.csproj", "{976E9CBA-B37F-4D2E-A35C-0D793E3F5001}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35A57224-D979-474D-A22E-245EAD42A608}.Debug|x86.ActiveCfg = Debug|x86
+		{35A57224-D979-474D-A22E-245EAD42A608}.Debug|x86.Build.0 = Debug|x86
+		{35A57224-D979-474D-A22E-245EAD42A608}.Release|x86.ActiveCfg = Release|x86
+		{35A57224-D979-474D-A22E-245EAD42A608}.Release|x86.Build.0 = Release|x86
+		{DA5225BB-DDCF-4A73-A660-30BB2D380DC9}.Debug|x86.ActiveCfg = Debug|x86
+		{DA5225BB-DDCF-4A73-A660-30BB2D380DC9}.Debug|x86.Build.0 = Debug|x86
+		{DA5225BB-DDCF-4A73-A660-30BB2D380DC9}.Release|x86.ActiveCfg = Release|x86
+		{DA5225BB-DDCF-4A73-A660-30BB2D380DC9}.Release|x86.Build.0 = Release|x86
+		{976E9CBA-B37F-4D2E-A35C-0D793E3F5001}.Debug|x86.ActiveCfg = Debug|x86
+		{976E9CBA-B37F-4D2E-A35C-0D793E3F5001}.Debug|x86.Build.0 = Debug|x86
+		{976E9CBA-B37F-4D2E-A35C-0D793E3F5001}.Release|x86.ActiveCfg = Release|x86
+		{976E9CBA-B37F-4D2E-A35C-0D793E3F5001}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
