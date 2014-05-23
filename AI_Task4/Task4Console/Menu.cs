@@ -27,7 +27,7 @@ namespace Task4Console
             if (param == "Memory")
             {
                 //container.RegisterType<AccessLibrary.IPersonAccessor, AccessLibrary.MemoryPersonAccessor>();
-                container.RegisterType<AccessLibrary.BisnessLogic>().RegisterType<AccessLibrary.IPersonAccessor, AccessLibrary.MemoryPersonAccessor>();
+                container.RegisterType<AccessLibrary.BisnessLogic>();//.RegisterType<AccessLibrary.IPersonAccessor, AccessLibrary.MemoryPersonAccessor>();
             }
             if (param == "File")
             {
@@ -37,7 +37,8 @@ namespace Task4Console
             {
                 container.RegisterType<AccessLibrary.IPersonAccessor, AccessLibrary.ADONETPersonAccessor>();
             }
-            var allaccessors = container.Resolve<AccessLibrary.IPersonAccessor>();
+            //var allaccessors = container.Resolve<AccessLibrary.IPersonAccessor>();
+            var allaccessors = container.Resolve<AccessLibrary.BisnessLogic>();
           /*  if (param == "CustomORM")
             {
                 container.RegisterType<AccessLibrary.IPersonAccessor, AccessLibrary.DBPersonAccessor>();

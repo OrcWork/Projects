@@ -19,7 +19,7 @@ namespace AccessLibrary
             Console.WriteLine(mpa.GetByName(nm));
             //Console.WriteLine();*/
             MemoryPersonAccessor mpa = new MemoryPersonAccessor();
-            mpa.GetAll();
+            Console.WriteLine(mpa.GetAll());
         }
     }
 }
