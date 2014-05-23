@@ -12,11 +12,20 @@ namespace AccessLibrary
         SqlCeConnection connection =
     new SqlCeConnection(@"Data Source=D:\C#\Projects\AI_Task4\AccessLibrary\ADONETPADB.sdf");
         string str = "";
+        Exception notFoundExcaption = new Exception("Имя не найдено");
+        Exception connectDBExcaption = new Exception("Ошибка поключения к базе данных, проверьте указанный путь к базе данных");
 
         public string GetAll()
         {
             string query = "SELECT * FROM Person";
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch 
+            {
+                throw connectDBExcaption;
+            }
             SqlCeCommand command = new SqlCeCommand(query, connection);
             SqlCeDataReader read = command.ExecuteReader();
 
@@ -32,7 +41,14 @@ namespace AccessLibrary
         public string GetByName(string nm)
         {
             string query = @"SELECT * FROM Person WHERE Name='" + nm + "'";
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                throw connectDBExcaption;
+            }
             SqlCeCommand command = new SqlCeCommand(query, connection);
             SqlCeDataReader read = command.ExecuteReader();
 
@@ -41,12 +57,21 @@ namespace AccessLibrary
                 str = str + read["NAME"].ToString() + "=" + read["VALUE"].ToString() + "\n";
             }
             connection.Close();
+            if (str == "") throw notFoundExcaption;
             return str;
         }
 
         public string Update(string nm, string vl)
         {
-            connection.Open();
+            GetByName(nm);
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                throw connectDBExcaption;
+            }
             string query = @"UPDATE Person SET Value = '" + vl + "' WHERE Name='" + nm + "'";
             SqlCeCommand command = new SqlCeCommand(query, connection);
             command.ExecuteNonQuery();
@@ -57,7 +82,15 @@ namespace AccessLibrary
 
         public string Delete(string nm)
         {
-            connection.Open();
+            GetByName(nm);
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                throw connectDBExcaption;
+            }
             string query = @"DELETE FROM Person WHERE Name='" + nm + "'";
             SqlCeCommand command = new SqlCeCommand(query, connection);
             command.ExecuteNonQuery();
@@ -68,7 +101,14 @@ namespace AccessLibrary
 
         public string Add(string nm, string vl)
         {
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                throw connectDBExcaption;
+            }
             string query = @"INSERT INTO Person (Name, Value) VALUES ('" + nm + "', '" + vl + "')";
             SqlCeCommand command = new SqlCeCommand(query, connection);
             command.ExecuteNonQuery();
@@ -76,5 +116,6 @@ namespace AccessLibrary
             str = "Значение добавлено";
             return str;
         }
+
     }
 }

@@ -1,0 +1,4 @@
+﻿Specify DIContainerFactoryAttribute with UnityContainerFactory type as parameter.
+
+Use DIContainer.Initialize to initialize new IoC container by specified modules.
+Use DIContainer.Instance to get current instance of IoC container.

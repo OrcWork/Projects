@@ -13,12 +13,21 @@ namespace AccessLibrary
         SqlCeConnection connection =
             new SqlCeConnection(@"Data Source=D:\C#\Projects\AI_Task4\AccessLibrary\ADONETPADB.sdf");//Data Source=(LocalDB)\v11.0;AttachDbFilename="C:\Users\Andrey_Isaev\Documents\Visual Studio 2010\Projects\AI_Task4\AI_Task3\Database1.mdf";Integrated Security=True
         string str = "";
+        Exception notFoundExcaption = new Exception("Имя не найдено");
+        Exception connectDBExcaption = new Exception("Ошибка поключения к базе данных, проверьте указанный путь к базе данных");
 
         // Вывод всех значений в базе
         public string GetAll(Type t)
         {
             System.Attribute[] attrs = Attribute.GetCustomAttributes(t);
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                throw connectDBExcaption;
+            }
             foreach (Attribute attr in attrs)
             {
                 if (attr is Attribut)
@@ -41,7 +50,14 @@ namespace AccessLibrary
         public string GetByName(FieldInfo fieldInfo, Type t, string nm)
         {
             Attribute[] attrtable = Attribute.GetCustomAttributes(t);
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                throw connectDBExcaption;
+            }
             foreach (Attribute attrtab in attrtable)
             {
                 if (attrtab is Attribut)
@@ -65,14 +81,23 @@ namespace AccessLibrary
                 }
             }
             connection.Close();
+            if (str == "") throw notFoundExcaption;
             return str;
         }
 
         //Перезапись значения в базе
         public string Update(FieldInfo fieldInfo, Type t, FieldInfo fieldInfo2, string nm, string vl)
         {
+            GetByName(fieldInfo, t, nm);
             Attribute[] attrtable = Attribute.GetCustomAttributes(t);
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                throw connectDBExcaption;
+            }
             foreach (Attribute attrtab in attrtable)
             {
                 if (attrtab is Attribut)
@@ -107,8 +132,16 @@ namespace AccessLibrary
         //Удаление значения из базы
         public string Delete(FieldInfo fieldInfo, Type t, string nm)
         {
+            GetByName(fieldInfo, t, nm);
             Attribute[] attrtable = Attribute.GetCustomAttributes(t);
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                throw connectDBExcaption;
+            }
             foreach (Attribute attrtab in attrtable)
             {
                 if (attrtab is Attribut)
@@ -136,7 +169,14 @@ namespace AccessLibrary
         public string Add(FieldInfo fieldInfo, Type t, FieldInfo fieldInfo2, string nm, string vl)
         {
             Attribute[] attrtable = Attribute.GetCustomAttributes(t);
-            connection.Open();
+            try
+            {
+                connection.Open();
+            }
+            catch
+            {
+                throw connectDBExcaption;
+            }
             foreach (Attribute attrtab in attrtable)
             {
                 if (attrtab is Attribut)

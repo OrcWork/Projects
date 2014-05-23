@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AccessLibrary
 {
-    interface IPersonAccessor
+    public interface IPersonAccessor
     {
         string GetAll();
         string GetByName(string nm);

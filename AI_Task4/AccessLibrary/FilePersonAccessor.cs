@@ -9,8 +9,8 @@ namespace AccessLibrary
 {
     public class FilePersonAccessor : IPersonAccessor
     {
-        String filename = "TextFile121.txt";
-       // String filename = @"D:\C#\Projects\AI_Task4\Task4Web\TextFile1.txt";
+        //String filename = "TextFile1.txt";
+        String filename = @"D:\C#\Projects\AI_Task4\Task4Web\TextFile1.txt";
         List<string> name = new List<string>();
         List<string> value = new List<string>();
         Exception notFoundExcaption = new Exception("Имя не найдено");
