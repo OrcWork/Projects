@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace AccessLibrary
 {
-    public class DBPersonAccessor
+    public class DBPersonAccessor : IPersonAccessor
     {
         SqlCeConnection connection =
             new SqlCeConnection(@"Data Source=D:\C#\Projects\AI_Task4\AccessLibrary\ADONETPADB.sdf");//Data Source=(LocalDB)\v11.0;AttachDbFilename="C:\Users\Andrey_Isaev\Documents\Visual Studio 2010\Projects\AI_Task4\AI_Task3\Database1.mdf";Integrated Security=True
-        string str = "";
         Exception notFoundExcaption = new Exception("Имя не найдено");
         Exception connectDBExcaption = new Exception("Ошибка поключения к базе данных, проверьте указанный путь к базе данных");
 
         // Вывод всех значений в базе
-        public string GetAll(Type t)
+        public string GetAllORM(Type t)
         {
+            string str = "";
             System.Attribute[] attrs = Attribute.GetCustomAttributes(t);
             try
             {
@@ -47,8 +47,9 @@ namespace AccessLibrary
         }
 
         //Поиск значения по имени
-        public string GetByName(FieldInfo fieldInfo, Type t, string nm)
+        public string GetByNameORM(FieldInfo fieldInfo, Type t, string nm)
         {
+            string str = "";
             Attribute[] attrtable = Attribute.GetCustomAttributes(t);
             try
             {
@@ -86,9 +87,9 @@ namespace AccessLibrary
         }
 
         //Перезапись значения в базе
-        public string Update(FieldInfo fieldInfo, Type t, FieldInfo fieldInfo2, string nm, string vl)
+        public void UpdateORM(FieldInfo fieldInfo, Type t, FieldInfo fieldInfo2, string nm, string vl)
         {
-            GetByName(fieldInfo, t, nm);
+            GetByNameORM(fieldInfo, t, nm);
             Attribute[] attrtable = Attribute.GetCustomAttributes(t);
             try
             {
@@ -125,14 +126,12 @@ namespace AccessLibrary
                 }
             }
             connection.Close();
-            str = "Значение перезаписано";
-            return str;
         }
 
         //Удаление значения из базы
-        public string Delete(FieldInfo fieldInfo, Type t, string nm)
+        public void DeleteORM(FieldInfo fieldInfo, Type t, string nm)
         {
-            GetByName(fieldInfo, t, nm);
+            GetByNameORM(fieldInfo, t, nm);
             Attribute[] attrtable = Attribute.GetCustomAttributes(t);
             try
             {
@@ -161,12 +160,10 @@ namespace AccessLibrary
                 }
             }
             connection.Close();
-            str = "Значение удалено";
-            return str;
         }
 
         //Добавление нового значения в базу
-        public string Add(FieldInfo fieldInfo, Type t, FieldInfo fieldInfo2, string nm, string vl)
+        public void AddORM(FieldInfo fieldInfo, Type t, FieldInfo fieldInfo2, string nm, string vl)
         {
             Attribute[] attrtable = Attribute.GetCustomAttributes(t);
             try
@@ -204,8 +201,31 @@ namespace AccessLibrary
                 }
             }
             connection.Close();
-            str = "Значение добавлено";
-            return str;
+        }
+
+        public string GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetByName(string nm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(string nm, string vl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(string nm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(string nm, string vl)
+        {
+            throw new NotImplementedException();
         }
     }
 }

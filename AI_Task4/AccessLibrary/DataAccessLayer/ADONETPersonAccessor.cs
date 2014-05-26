@@ -11,12 +11,12 @@ namespace AccessLibrary
     {
         SqlCeConnection connection =
     new SqlCeConnection(@"Data Source=D:\C#\Projects\AI_Task4\AccessLibrary\ADONETPADB.sdf");
-        string str = "";
         Exception notFoundExcaption = new Exception("Имя не найдено");
         Exception connectDBExcaption = new Exception("Ошибка поключения к базе данных, проверьте указанный путь к базе данных");
 
         public string GetAll()
         {
+            string str = "";
             string query = "SELECT * FROM Person";
             try
             {
@@ -40,6 +40,7 @@ namespace AccessLibrary
 
         public string GetByName(string nm)
         {
+            string str = "";
             string query = @"SELECT * FROM Person WHERE Name='" + nm + "'";
             try
             {
@@ -61,7 +62,7 @@ namespace AccessLibrary
             return str;
         }
 
-        public string Update(string nm, string vl)
+        public void Update(string nm, string vl)
         {
             GetByName(nm);
             try
@@ -76,11 +77,9 @@ namespace AccessLibrary
             SqlCeCommand command = new SqlCeCommand(query, connection);
             command.ExecuteNonQuery();
             connection.Close();
-            str = "Значение перезаписано";
-            return str;
         }
 
-        public string Delete(string nm)
+        public void Delete(string nm)
         {
             GetByName(nm);
             try
@@ -94,12 +93,10 @@ namespace AccessLibrary
             string query = @"DELETE FROM Person WHERE Name='" + nm + "'";
             SqlCeCommand command = new SqlCeCommand(query, connection);
             command.ExecuteNonQuery();
-            str = "Значение удалено";
             connection.Close();
-            return str;
         }
 
-        public string Add(string nm, string vl)
+        public void Add(string nm, string vl)
         {
             try
             {
@@ -113,9 +110,34 @@ namespace AccessLibrary
             SqlCeCommand command = new SqlCeCommand(query, connection);
             command.ExecuteNonQuery();
             connection.Close();
-            str = "Значение добавлено";
-            return str;
         }
 
+
+
+        public string GetAllORM(Type t)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public string GetByNameORM(System.Reflection.FieldInfo fieldInfo, Type t, string nm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateORM(System.Reflection.FieldInfo fieldInfo, Type t, System.Reflection.FieldInfo fieldInfo2, string nm, string vl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteORM(System.Reflection.FieldInfo fieldInfo, Type t, string nm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddORM(System.Reflection.FieldInfo fieldInfo, Type t, System.Reflection.FieldInfo fieldInfo2, string nm, string vl)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

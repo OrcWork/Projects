@@ -9,19 +9,19 @@ namespace AccessLibrary
 {
     public class FilePersonAccessor : IPersonAccessor
     {
-        //String filename = "TextFile1.txt";
-        String filename = @"D:\C#\Projects\AI_Task4\Task4Web\TextFile1.txt";
+        String filename = "TextFile1.txt";
+        //String filename = @"D:\C#\Projects\AI_Task4\Task4Web\TextFile1.txt";
         List<string> name = new List<string>();
         List<string> value = new List<string>();
         Exception notFoundExcaption = new Exception("Имя не найдено");
         Exception readFileExcaption = new Exception("Ошибка чтения файла, проверьте указанный путь к файлу");
         Exception parseFileExcaption = new Exception("Невозможно распарсить файл");
         Exception rewriteFileExcaption = new Exception("Невозможно записать данные файл");
-        string str = "";
 
         // Вывод всех значений в файле
         public string GetAll()
         {
+            string str = "";
             try
             {
                 StreamReader sr = new StreamReader(filename);
@@ -31,7 +31,6 @@ namespace AccessLibrary
             }
             catch
             {
-                //str = "Ошибка чтения файла";
                 throw readFileExcaption;
             }
             return str;
@@ -40,6 +39,7 @@ namespace AccessLibrary
         //Поиск значения по имени
         public string GetByName(string nm)
         {
+            string str = "";
             String line;
             using (StreamReader sr = new StreamReader(filename))
             {
@@ -54,9 +54,6 @@ namespace AccessLibrary
                     }
                 }
                 if (!name.Contains(nm) & str == "") throw notFoundExcaption;
-  /*              {
-                    str = "Имя не найдено";
-                }*/
                 sr.Close();
                 return str;
             }
@@ -64,49 +61,43 @@ namespace AccessLibrary
 
 
         //Перезапись значения в файле
-        public string Update(string nm, string vl)
+        public void Update(string nm, string vl)
         {
+            ParseFile();
             if (!name.Contains(nm)) throw notFoundExcaption;
-/*            {
-                str = "Имя не найдено";
-            }*/
             for (int i = 0; i < name.Count; i++)
             {
                 if (name[i].ToString() == nm)
                 {
                     value[i] = vl;
-                    str = "Значение перезаписано";
                 }
             }
 
             Rewrite();
-            return str;
         }
 
         //Удаление Значения из файла
-        public string Delete(string nm)
+        public void Delete(string nm)
         {
+            ParseFile();
             if (!name.Contains(nm)) throw notFoundExcaption;
- /*           {
-                str = "Имя не найдено";
-            }*/
             for (int i = 0; i < name.Count; i++)
             {
                 if (name[i].ToString() == nm)
                 {
                     name.RemoveAt(i);
                     value.RemoveAt(i);
-                    str = "Значение удалено";
                 }
             }
             
             Rewrite();
-            return str;
         }
 
         // Метод который парсит файл и записывает его в листы
-        public void parseFile()
+        public void ParseFile()
         {
+            name = new List<string>();
+            value = new List<string>();
             try
             {
                 String line;
@@ -158,14 +149,40 @@ namespace AccessLibrary
         }
 
         //Добавление нового значения в файл
-        public string Add(string nm, string vl)
+        public void Add(string nm, string vl)
         {
+            ParseFile();
             name.Add(nm);
             value.Add(vl);
             Rewrite();
-            str = "Новое значение добавлено";
-            return str;
         }
 
+
+
+        public string GetAllORM(Type t)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public string GetByNameORM(System.Reflection.FieldInfo fieldInfo, Type t, string nm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateORM(System.Reflection.FieldInfo fieldInfo, Type t, System.Reflection.FieldInfo fieldInfo2, string nm, string vl)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteORM(System.Reflection.FieldInfo fieldInfo, Type t, string nm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddORM(System.Reflection.FieldInfo fieldInfo, Type t, System.Reflection.FieldInfo fieldInfo2, string nm, string vl)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

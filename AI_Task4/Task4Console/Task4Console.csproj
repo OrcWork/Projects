@@ -67,7 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DIRegistrationModule.cs" />
-    <Compile Include="Menu.cs" />
+    <Compile Include="IocClass.cs" />
+    <Compile Include="PresentationLayer\IMenu.cs" />
+    <Compile Include="PresentationLayer\Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
