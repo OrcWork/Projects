@@ -1,6 +1,8 @@
 ﻿using AccessLibrary;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,9 +14,44 @@ namespace Task4Web
     {
         AccessLibrary.DBPersonAccessor corm = new AccessLibrary.DBPersonAccessor();
         AccessLibrary.ADONETPersonAccessor anpa = new AccessLibrary.ADONETPersonAccessor();
+        IocClass ic = new IocClass();
+        
+        //var container = new UnityContainer();
+
+       private readonly IBisnessLogic _bisnessLogic;
+       // String param = ConfigurationManager.AppSettings["Source"];
+
+      /*  public WebForm1(IBisnessLogic bisnessLogic)
+        {
+            _bisnessLogic = bisnessLogic;
+        }*/
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ic.Ioc();
+            var container = new UnityContainer();
+            //container.RegisterType<IMenu, Menu>();
+            container.RegisterType<IBisnessLogic, BisnessLogic>();
+            //String param = ConfigurationManager.AppSettings["Source"];
+            if (RadioButtonList1.SelectedValue == "Memory")
+            {
+                container.RegisterType<IPersonAccessor, MemoryPersonAccessor>();
+            }
+            if (RadioButtonList1.SelectedValue == "File")
+            {
+                container.RegisterType<IPersonAccessor, FilePersonAccessor>();
+            }
+            if (RadioButtonList1.SelectedValue == "DataBase")
+            {
+                container.RegisterType<IPersonAccessor, ADONETPersonAccessor>();
+            }
+            if (RadioButtonList1.SelectedValue == "CustomORM")
+            {
+                container.RegisterType<IPersonAccessor, DBPersonAccessor>();
+            }
+            var bisness = container.Resolve<IBisnessLogic>().GetAll();//.BisnessLogic(); //Resolve<IMenu>().MainMenu();
+          
         }
         // Получить все значения
         protected void GetAllButton_Click(object sender, EventArgs e)
@@ -23,8 +60,10 @@ namespace Task4Web
             {
                 if (RadioButtonList1.SelectedValue == "Memory")
                 {
-                    AccessLibrary.MemoryPersonAccessor mpa = new AccessLibrary.MemoryPersonAccessor();
-                    Resultlbl.Text = mpa.GetAll();
+                    /*AccessLibrary.MemoryPersonAccessor mpa = new AccessLibrary.MemoryPersonAccessor();
+                    Resultlbl.Text = mpa.GetAll();*/
+                   // bisness.GetAll();
+                    Resultlbl.Text = _bisnessLogic.GetAll();
                 }
                 if (RadioButtonList1.SelectedValue == "File")
                 {
@@ -37,7 +76,7 @@ namespace Task4Web
                 }
                 if (RadioButtonList1.SelectedValue == "CustomORM")
                 {
-                    Resultlbl.Text = corm.GetAll(typeof(Person));
+                    Resultlbl.Text = corm.GetAllORM(typeof(Person));
 
                 }
             }
@@ -53,7 +92,7 @@ namespace Task4Web
             try
             {
                 string nm2 = Name.Text;
-                if (RadioButtonList1.SelectedValue == "Memory")
+            /*    if (RadioButtonList1.SelectedValue == "Memory")
                 {
                     AccessLibrary.MemoryPersonAccessor mpa = new AccessLibrary.MemoryPersonAccessor();
                     Resultlbl.Text = mpa.GetByName(nm2);
@@ -69,8 +108,8 @@ namespace Task4Web
                 }
                 if (RadioButtonList1.SelectedValue == "CustomORM")
                 {
-                    Resultlbl.Text = corm.GetByName(typeof(Person).GetField("name"), typeof(Person), nm2);
-                }
+                    Resultlbl.Text = corm.GetByNameORM(typeof(Person).GetField("name"), typeof(Person), nm2);
+                }*/
             }
             catch (Exception ex)
             {
@@ -85,7 +124,7 @@ namespace Task4Web
             {
                 string nm3 = Name.Text;
                 string vl3 = Value.Text;
-                if (RadioButtonList1.SelectedValue == "Memory")
+             /*   if (RadioButtonList1.SelectedValue == "Memory")
                 {
                     AccessLibrary.MemoryPersonAccessor mpa = new AccessLibrary.MemoryPersonAccessor();
                     Resultlbl.Text = mpa.Update(nm3, vl3);
@@ -93,7 +132,7 @@ namespace Task4Web
                 if (RadioButtonList1.SelectedValue == "File")
                 {
                     AccessLibrary.FilePersonAccessor mpa = new AccessLibrary.FilePersonAccessor();
-                    mpa.parseFile();
+                    mpa.ParseFile();
                     Resultlbl.Text = mpa.Update(nm3, vl3);
                 }
                 if (RadioButtonList1.SelectedValue == "DataBase")
@@ -102,8 +141,8 @@ namespace Task4Web
                 }
                 if (RadioButtonList1.SelectedValue == "CustomORM")
                 {
-                    Resultlbl.Text = corm.Update(typeof(Person).GetField("name"), typeof(Person), typeof(Person).GetField("value"), nm3, vl3);
-                }
+                    Resultlbl.Text = corm.UpdateORM(typeof(Person).GetField("name"), typeof(Person), typeof(Person).GetField("value"), nm3, vl3);
+                }*/
             }
             catch (Exception ex)
             {
@@ -117,7 +156,7 @@ namespace Task4Web
             try
             {
                 string nm4 = Name.Text;
-                if (RadioButtonList1.SelectedValue == "Memory")
+              /*  if (RadioButtonList1.SelectedValue == "Memory")
                 {
                     AccessLibrary.MemoryPersonAccessor mpa = new AccessLibrary.MemoryPersonAccessor();
                     Resultlbl.Text = mpa.Delete(nm4);
@@ -134,8 +173,8 @@ namespace Task4Web
                 }
                 if (RadioButtonList1.SelectedValue == "CustomORM")
                 {
-                    Resultlbl.Text = corm.Delete(typeof(Person).GetField("name"), typeof(Person), nm4);
-                }
+                    Resultlbl.Text = corm.DeleteORM(typeof(Person).GetField("name"), typeof(Person), nm4);
+                }*/
             }
             catch (Exception ex)
             {
@@ -150,7 +189,7 @@ namespace Task4Web
             {
                 string nm5 = Name.Text;
                 string vl5 = Value.Text;
-                if (RadioButtonList1.SelectedValue == "Memory")
+         /*       if (RadioButtonList1.SelectedValue == "Memory")
                 {
                     AccessLibrary.MemoryPersonAccessor mpa = new AccessLibrary.MemoryPersonAccessor();
                     Resultlbl.Text = mpa.Add(nm5, vl5);
@@ -167,8 +206,8 @@ namespace Task4Web
                 }
                 if (RadioButtonList1.SelectedValue == "CustomORM")
                 {
-                    Resultlbl.Text = corm.Add(typeof(Person).GetField("name"), typeof(Person), typeof(Person).GetField("value"), nm5, vl5);
-                }
+                    Resultlbl.Text = corm.AddORM(typeof(Person).GetField("name"), typeof(Person), typeof(Person).GetField("value"), nm5, vl5);
+                }*/
             }
             catch (Exception ex)
             {
